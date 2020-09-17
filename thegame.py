@@ -1,14 +1,50 @@
 from graphics import *
 import tkinter as tk
+
+# ----------------------------------------------Pantalla grafica----------------------------------------------
 def main():
     win = GraphWin('Game', 800,900)
-    #win.setCoords(0,0,)
-    logo = Image(Point(399,150),"IMG_0082.gif")
+    win.setCoords(0,0,100,100)
+    logo = Image(Point(22,83),"IMG_0082.gif")
+    
+    #Instrucciones
+    rec = Rectangle(Point(45,92), Point(90,78))
+    instrucciones = Text(rec.getCenter(), "Este espacio es para escribir\ncomo funciona este juego y las reglas.")
+
+    #Linea divisoria
+    div = Line(Point(10,68), Point(90,68))
+
+    gameBoard = Rectangle(Point(13,60), Point(87,5))
+    #Circulos 10.57  12.33
+
+    c11 = Circle(Point(23.57,12.33),3)
+
+    c21 = c11.clone()
+    c21.move(10.57,0)
+
+    c31 = c11.clone()
+    c31.move(21.14,0)
+
+    c41 = c11.clone()
+    c41.move(21.14,0)
+    
+    #Draw
     logo.draw(win)
-    
-    
-    rec = Rectangle(Point(100,100), Point(300,300))
+    instrucciones.draw(win)
     rec.draw(win)
+    div.draw(win)
+
+    c11.draw(win)
+    c21.draw(win)
+    c31.draw(win)
+    c41.draw(win)
+    c51.draw(win)
+    c61.draw(win)
+    c71.draw(win)
+    c12.draw(win)
+    c22.draw(win)
+    c32.draw(win)
+    gameBoard.draw(win)
     
        
 
@@ -17,6 +53,8 @@ def main():
     win.getMouse()
     win.close()
 
+
+# ----------------------------------------------Juego no grafico----------------------------------------------
 def inputNumber(message):
     while True:
         try:
@@ -28,6 +66,7 @@ def inputNumber(message):
             return userInput 
         break 
 
+# ----------------------------------------------Se añade la pieza al board----------------------------------------------
 def movimiento(board, jugada, turno, columnas, filas, i):
     board[columnas-i][jugada-1] = turno
     
@@ -40,7 +79,7 @@ def movimiento(board, jugada, turno, columnas, filas, i):
         board[columnas][jugada-1] = turno '''
     
 
-
+# ----------------------------------------------Se reciben los input de los jugadores y se valida que el mismo entre un numero entero----------------------------------------------
 def validacion_entradas(jugada, jugador):
     while True:
         try:
@@ -55,21 +94,45 @@ def validacion_entradas(jugada, jugador):
             return  jugada
         break
 
+# ----------------------------------------------Determina cual es el proximo espacio disponible en cada columna----------------------------------------------
 def proximo_espacio_disponible(board, jugada, turno, columnas, filas):
     i = 2
     while True:
         try:
             while board[columnas-i][jugada-1] != 0:
                 i = i + 1
+                if i > 7:
+                    print('Esta columna ya esta llena. Intente en otra.')
+                    i = 8
+                    if turno == 1:
+                        turno = 2
+                    else:
+                        turno = 1
+                    break
             return i
         except ValueError:
+            print('Esta columna ya esta llena. Intente en otra.')
             break
             
-
+def entradas(turno, jugada):
+    jugada = 0
+    if turno == 2:
+        jugador = "Jugador #1"
+        jugada = validacion_entradas(jugada, jugador)
+        while jugada < 1 or jugada > 7:
+            jugada = validacion_entradas(jugada, jugador)
+        turno = 1
+        return jugada, turno 
+    else:
+        jugador = "Jugador #2"
+        jugada = validacion_entradas(jugada, jugador)
+        turno = 2
+        return jugada, turno
 
 def columnaLlena():
     pass
 
+# ----------------------------------------------Codigo main (No utiliza graphic.py)----------------------------------------------
 def connect():
     #Variables
     columnas = 7
@@ -88,7 +151,7 @@ def connect():
     #Entrada de turnos
     while finJuego == False:
         try:
-            if turno == 2:
+            ''' if turno == 2:
                 jugador = "Jugador #1"
                 jugada = validacion_entradas(jugada, jugador)
                 while jugada < 1 or jugada > 7:
@@ -97,10 +160,17 @@ def connect():
             else:
                 jugador = "Jugador #2"
                 jugada = validacion_entradas(jugada, jugador)
-                turno = 2
+                turno = 2 '''
         
-        #entradas(turno)
+            jugada, turno = entradas(turno, jugada)
             i = proximo_espacio_disponible(board,jugada,turno, columnas, filas)
+            while i == 8:
+                if turno == 1:
+                    turno = 2
+                else:
+                    turno = 1
+                jugada, turno = entradas(turno, jugada)
+                i = proximo_espacio_disponible(board,jugada,turno, columnas, filas)
         except ValueError:
             print('Columna llena. Intente otra columna.')
             continue
@@ -111,20 +181,5 @@ def connect():
                 print(elem, end=' ')
             print()
     
-
-def entradas(turno):
-    jugada = 0
-    if turno == 2:
-        jugador = "Jugador #1"
-        jugada = validacion_entradas(jugada, jugador)
-        while jugada < 1 or jugada > 7:
-            jugada = validacion_entradas(jugada, jugador)
-        turno = 1
-    else:
-        jugador = "Jugador #2"
-        jugada = validacion_entradas(jugada, jugador)
-        turno = 2
-
-
-connect()
-#main()
+#connect()
+main()
