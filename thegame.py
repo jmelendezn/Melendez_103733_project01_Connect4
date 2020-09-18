@@ -120,11 +120,6 @@ def main():
         j.draw(win)
         mx = mx + 10.2
 
-# Coneccion con juego no grafico
-    k = win.getKey()
-    
-    
-
 # Se dibujan mas
     logo.draw(win)
     instrucciones.draw(win)
@@ -132,7 +127,9 @@ def main():
     div.draw(win)
 
     
+# Coneccion con juego no grafico
     
+    connect(win, fila1, fila2, fila3, fila4, fila5,fila6)
     
        
 
@@ -141,12 +138,106 @@ def main():
     win.getMouse()
     win.close()
 
+def cambioColor(main):
+    pass
+    
 
 # ----------------------------------------------Juego no grafico----------------------------------------------
 
 # ----------------------------------------------Se añade la pieza al board----------------------------------------------
-def movimiento(board, jugada, turno, columnas, filas, i):
+def movimiento(board, jugada, turno, columnas, filas, i, win,fila1, fila2, fila3, fila4, fila5,fila6):
     board[columnas-i][jugada-1] = turno
+    print("\n",columnas-i, " ", jugada-1)
+    if turno == 1:
+        teamcolor = 'red'
+    else:
+        teamcolor = 'yellow'
+    if columnas-i == 5 and jugada-1 == 0:   #COLUMNA 1
+        fila1[0].setFill(teamcolor) #11
+    elif columnas-i == 5 and jugada-1 == 1:
+        fila1[1].setFill(teamcolor) #12
+    elif columnas-i == 5 and jugada-1 == 2:
+        fila1[2].setFill(teamcolor) #13
+    elif columnas-i == 5 and jugada-1 == 3:
+        fila1[3].setFill(teamcolor) #14
+    elif columnas-i == 5 and jugada-1 == 4:
+        fila1[4].setFill(teamcolor) #15
+    elif columnas-i == 5 and jugada-1 == 5:
+        fila1[5].setFill(teamcolor) #16
+    elif columnas-i == 5 and jugada-1 == 6:
+        fila1[6].setFill(teamcolor) #17
+    elif columnas-i == 4 and jugada-1 == 0: #FILA 2
+        fila2[0].setFill(teamcolor)
+    elif columnas-i == 4 and jugada-1 == 1:
+        fila2[1].setFill(teamcolor)
+    elif columnas-i == 4 and jugada-1 == 2:
+        fila2[2].setFill(teamcolor)
+    elif columnas-i == 4 and jugada-1 == 3:
+        fila2[3].setFill(teamcolor)
+    elif columnas-i == 4 and jugada-1 == 4:
+        fila2[4].setFill(teamcolor)
+    elif columnas-i == 4 and jugada-1 == 5:
+        fila2[5].setFill(teamcolor)
+    elif columnas-i == 4 and jugada-1 == 6:
+        fila2[6].setFill(teamcolor)
+    elif columnas-i == 3 and jugada-1 == 0: #FILA 3
+        fila3[0].setFill(teamcolor)
+    elif columnas-i == 3 and jugada-1 == 1:
+        fila3[1].setFill(teamcolor)
+    elif columnas-i == 3 and jugada-1 == 2:
+        fila3[2].setFill(teamcolor)
+    elif columnas-i == 3 and jugada-1 == 3:
+        fila3[3].setFill(teamcolor)
+    elif columnas-i == 3 and jugada-1 == 4:
+        fila3[4].setFill(teamcolor)
+    elif columnas-i == 3 and jugada-1 == 5:
+        fila3[5].setFill(teamcolor)
+    elif columnas-i == 3 and jugada-1 == 6:
+        fila3[6].setFill(teamcolor)
+    elif columnas-i == 2 and jugada-1 == 0: #FILA 4
+        fila4[0].setFill(teamcolor)
+    elif columnas-i == 2 and jugada-1 == 1:
+        fila4[1].setFill(teamcolor)
+    elif columnas-i == 2 and jugada-1 == 2:
+        fila4[2].setFill(teamcolor)
+    elif columnas-i == 2 and jugada-1 == 3:
+        fila4[3].setFill(teamcolor)
+    elif columnas-i == 2 and jugada-1 == 4:
+        fila4[4].setFill(teamcolor)
+    elif columnas-i == 2 and jugada-1 == 5:
+        fila4[5].setFill(teamcolor)
+    elif columnas-i == 2 and jugada-1 == 6:
+        fila4[6].setFill(teamcolor)
+    elif columnas-i == 2 and jugada-1 == 0: #FILA 5
+        fila5[0].setFill(teamcolor)
+    elif columnas-i == 1 and jugada-1 == 1:
+        fila5[1].setFill(teamcolor)
+    elif columnas-i == 1 and jugada-1 == 2:
+        fila5[2].setFill(teamcolor)
+    elif columnas-i == 1 and jugada-1 == 3:
+        fila5[3].setFill(teamcolor)
+    elif columnas-i == 1 and jugada-1 == 4:
+        fila5[4].setFill(teamcolor)
+    elif columnas-i == 1 and jugada-1 == 5:
+        fila5[5].setFill(teamcolor)
+    elif columnas-i == 1 and jugada-1 == 6:
+        fila5[6].setFill(teamcolor)
+    elif columnas-i == 0 and jugada-1 == 0: #FILA 6
+        fila6[0].setFill(teamcolor)
+    elif columnas-i == 0 and jugada-1 == 1:
+        fila6[1].setFill(teamcolor)
+    elif columnas-i == 0 and jugada-1 == 2:
+        fila6[2].setFill(teamcolor)
+    elif columnas-i == 0 and jugada-1 == 3:
+        fila6[3].setFill(teamcolor)
+    elif columnas-i == 0 and jugada-1 == 4:
+        fila6[4].setFill(teamcolor)
+    elif columnas-i == 0 and jugada-1 == 5:
+        fila6[5].setFill(teamcolor)
+    elif columnas-i == 0 and jugada-1 == 6:
+        fila6[6].setFill(teamcolor)
+
+
     
     ''' if board[columnas-i][jugada-1] == 0:
         board[columnas-2][jugada-1] = turno
@@ -158,11 +249,11 @@ def movimiento(board, jugada, turno, columnas, filas, i):
     
 
 # ----------------------------------------------Se reciben los input de los jugadores y se valida que el mismo entre un numero entero----------------------------------------------
-def validacion_entradas(jugada, jugador):
+def validacion_entradas(jugada, jugador, win):
     while True:
         try:
             while True:
-                jugada = int(input(jugador +" entre el numero de la columna que desea jugar (1-7): "))
+                jugada = int(win.getKey())
                 
                 return  jugada
         except ValueError:
@@ -192,18 +283,18 @@ def proximo_espacio_disponible(board, jugada, turno, columnas, filas):
             print('Esta columna ya esta llena. Intente en otra.')
             break
             
-def entradas(turno, jugada):
+def entradas(turno, jugada, win):
     jugada = 0
     if turno == 2:
         jugador = "Jugador #1"
-        jugada = validacion_entradas(jugada, jugador)
+        jugada = validacion_entradas(jugada, jugador, win)
         while jugada < 1 or jugada > 7:
-            jugada = validacion_entradas(jugada, jugador)
+            jugada = validacion_entradas(jugada, jugador,win)
         turno = 1
         return jugada, turno 
     else:
         jugador = "Jugador #2"
-        jugada = validacion_entradas(jugada, jugador)
+        jugada = validacion_entradas(jugada, jugador, win)
         turno = 2
         return jugada, turno
 
@@ -211,7 +302,7 @@ def columnaLlena():
     pass
 
 # ----------------------------------------------Codigo main (No utiliza graphic.py)----------------------------------------------
-def connect():
+def connect(win,fila1, fila2, fila3, fila4, fila5,fila6):
     #Variables
     columnas = 7
     filas = 6
@@ -229,35 +320,24 @@ def connect():
     #Entrada de turnos
     while finJuego == False:
         try:
-            ''' if turno == 2:
-                jugador = "Jugador #1"
-                jugada = validacion_entradas(jugada, jugador)
-                while jugada < 1 or jugada > 7:
-                    jugada = validacion_entradas(jugada, jugador)
-                turno = 1
-            else:
-                jugador = "Jugador #2"
-                jugada = validacion_entradas(jugada, jugador)
-                turno = 2 '''
-        
-            jugada, turno = entradas(turno, jugada)
+            jugada, turno = entradas(turno, jugada, win)
             i = proximo_espacio_disponible(board,jugada,turno, columnas, filas)
             while i == 8:
                 if turno == 1:
                     turno = 2
                 else:
                     turno = 1
-                jugada, turno = entradas(turno, jugada)
+                jugada, turno = entradas(turno, jugada, win,fila1, fila2, fila3, fila4, fila5,fila6)
                 i = proximo_espacio_disponible(board,jugada,turno, columnas, filas)
         except ValueError:
             print('Columna llena. Intente otra columna.')
             continue
 
-        movimiento(board,jugada,turno, columnas, filas, i)
+        movimiento(board,jugada,turno, columnas, filas, i, win,fila1, fila2, fila3, fila4, fila5,fila6)
         for row in board:
             for elem in row:
                 print(elem, end=' ')
             print()
     
-connect()
-#main()
+#connect()
+main()
