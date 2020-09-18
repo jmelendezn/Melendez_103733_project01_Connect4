@@ -1,10 +1,12 @@
 from graphics import *
-import tkinter as tk
 
 # ----------------------------------------------Pantalla grafica----------------------------------------------
 def main():
+
+#Se crea la ventana del juego
     win = GraphWin('Game', 800,900)
     win.setCoords(0,0,100,100)
+# Se añade una imagen con un logo que se creo
     logo = Image(Point(22,83),"IMG_0082.gif")
     
 
@@ -17,6 +19,7 @@ def main():
 #Instrucciones
     rec = Rectangle(Point(45,92), Point(90,78))
     instrucciones = Text(rec.getCenter(), "Conecta 4 fichas de forma horizontal, \nvertical o diagonal para ganar. \nEl primer jugador tendra fichas rojas \ny el segundo jugador tendra fichas amarrillas.")
+    instrucciones.setStyle('bold')
 
 #Linea divisoria
     div = Line(Point(10,68), Point(90,68))
@@ -25,6 +28,7 @@ def main():
     gameBoard = Rectangle(Point(13,60), Point(87,5))
     gameBoard.setFill(color_rgb(37,68,65))
     gameBoard.draw(win)
+# Se crean y se dibujan los numeros que van en la parte de abajo del board
     num1 = Text(Point(9,3), '1')
     num1.setSize(14)
     num1.setStyle('bold')
@@ -152,7 +156,7 @@ def main():
         j.draw(win)
         mx = mx + 10.2
 
-# Se dibujan mas
+# Se dibujan mas objetos
     logo.draw(win)
     instrucciones.draw(win)
     rec.draw(win)
@@ -174,7 +178,6 @@ def cambioColor(main):
     pass
     
 
-# ----------------------------------------------Juego no grafico----------------------------------------------
 
 # ----------------------------------------------Se añade la pieza al board----------------------------------------------
 def movimiento(board, jugada, turno, columnas, filas, i, win,fila1, fila2, fila3, fila4, fila5,fila6):
@@ -342,7 +345,7 @@ def proximo_espacio_disponible(board, jugada, turno, columnas, filas,errorTxt):
             while board[columnas-i][jugada-1] != 0:
                 i = i + 1
                 if i > 7:
-                    errorTxt.setText('Esta columna ya esta llena. Intente en otra.')
+                    errorTxt.setText('Esta columna ya esta llena. Intente en otra.') #indica en la pantalla si esa columna ya esta llena
                     i = 8
                     if turno == 1:
                         turno = 2
@@ -353,7 +356,9 @@ def proximo_espacio_disponible(board, jugada, turno, columnas, filas,errorTxt):
         except ValueError:
             print('Esta columna ya esta llena. Intente en otra.')
             break
-            
+
+
+# ----------------------------------------------Entrada de datos----------------------------------------------      
 def entradas(turno, jugada, win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt):
     jugada = 0
     if turno == 2:
@@ -375,9 +380,11 @@ def entradas(turno, jugada, win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt
         turno = 2
         return jugada, turno
 
+# ----------------------------------------------Funcion para indicar si todas las columnas estan llenas y termino en empate----------------------------------------------
 def columnaLlena():
     pass
 
+# ----------------------------------------------Funcion para verificar si hay un ganador----------------------------------------------
 def verificar_ganador(board, jugada, turno):
     #Verificar horizontal
     for i in range(3):
@@ -401,6 +408,7 @@ def verificar_ganador(board, jugada, turno):
                     return 4
     return False
 
+# ----------------------------------------------Cuadro que aparece cuando un jugador gana----------------------------------------------
 def pantalla_ganadora (win, ganador):
     rec2 = Rectangle(Point(21.5,40), Point(77,25))
     rec2.setFill(color_rgb(255,89,94))
@@ -419,7 +427,7 @@ def pantalla_ganadora (win, ganador):
     for i in objetos_ganadores:
         i.draw(win)
 
-# ----------------------------------------------Codigo main (No utiliza graphic.py)----------------------------------------------
+# ----------------------------------------------Codigo principal del juego----------------------------------------------
 def connect(win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt):
     #Variables
     columnas = 7
@@ -451,12 +459,19 @@ def connect(win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt):
 
         movimiento(board,jugada,turno, columnas, filas, i, win,fila1, fila2, fila3, fila4, fila5,fila6)
         
+        for row in board:
+            for x in row:
+                print(x , end=" ")
+            print()
+
         finJuego = verificar_ganador(board, jugada, turno)
         if turno == 1:
             ganador = 'Jugador #1'
         else:
             ganador = 'Jugador #2'
     pantalla_ganadora (win, ganador)
+
+# ----------------------------------------------Codigo para que corra el juego----------------------------------------------
 main()
 
 
