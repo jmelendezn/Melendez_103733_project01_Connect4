@@ -7,6 +7,13 @@ def main():
     win.setCoords(0,0,100,100)
     logo = Image(Point(22,83),"IMG_0082.gif")
     
+
+#Texto de error
+    errorTxt = Text(Point(49,62), ' ')
+    errorTxt.setSize(13)
+    errorTxt.setStyle('bold')
+    errorTxt.setTextColor('red')
+    errorTxt.draw(win)
 #Instrucciones
     rec = Rectangle(Point(45,92), Point(90,78))
     instrucciones = Text(rec.getCenter(), "Conecta 4 fichas de forma horizontal, \nvertical o diagonal para ganar. \nEl primer jugador tendra fichas rojas \ny el segundo jugador tendra fichas amarrillas.")
@@ -154,7 +161,7 @@ def main():
     
 # Coneccion con juego no grafico
     
-    connect(win, fila1, fila2, fila3, fila4, fila5,fila6)
+    connect(win, fila1, fila2, fila3, fila4, fila5,fila6,errorTxt)
     
        
 
@@ -309,7 +316,7 @@ def movimiento(board, jugada, turno, columnas, filas, i, win,fila1, fila2, fila3
     
 
 # ----------------------------------------------Se reciben los input de los jugadores y se valida que el mismo entre un numero entero----------------------------------------------
-def validacion_entradas(jugada, jugador, win):
+def validacion_entradas(jugada, jugador, win,errorTxt):
     while True:
         try:
             while True:
@@ -317,26 +324,25 @@ def validacion_entradas(jugada, jugador, win):
                 textturno.draw(win)
                 jugada = int(win.getKey())
                 textturno.setText(' ')
+                errorTxt.setText(' ')
                 return  jugada
         except ValueError:
-            error1 = 'El valor entrado no es valido. Vuelva a intentarlo.'
-            errortext = Text(Point(49,70), error1)
-            errortext.draw(win)
-            
+            errorTxt.setText('El valor entrado no es valido. Vuelva a intentarlo.')
+            textturno.setText(' ')
             continue
         else:
             return  jugada
         break
 
 # ----------------------------------------------Determina cual es el proximo espacio disponible en cada columna----------------------------------------------
-def proximo_espacio_disponible(board, jugada, turno, columnas, filas):
+def proximo_espacio_disponible(board, jugada, turno, columnas, filas,errorTxt):
     i = 2
     while True:
         try:
             while board[columnas-i][jugada-1] != 0:
                 i = i + 1
                 if i > 7:
-                    print('Esta columna ya esta llena. Intente en otra.')
+                    errorTxt.setText('Esta columna ya esta llena. Intente en otra.')
                     i = 8
                     if turno == 1:
                         turno = 2
@@ -348,18 +354,24 @@ def proximo_espacio_disponible(board, jugada, turno, columnas, filas):
             print('Esta columna ya esta llena. Intente en otra.')
             break
             
-def entradas(turno, jugada, win,fila1, fila2, fila3, fila4, fila5,fila6):
+def entradas(turno, jugada, win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt):
     jugada = 0
     if turno == 2:
         jugador = "Jugador #1"
-        jugada = validacion_entradas(jugada, jugador, win)
-        while jugada < 1 or jugada > 7:
-            jugada = validacion_entradas(jugada, jugador,win)
+        jugada = validacion_entradas(jugada, jugador, win,errorTxt)
+        if jugada < 1 or jugada > 7:
+            errorTxt.setText('El valor entrado no es valido. Vuelva a intentarlo.')
+            while jugada < 1 or jugada > 7:
+                jugada = validacion_entradas(jugada, jugador,win,errorTxt)
         turno = 1
         return jugada, turno 
     else:
         jugador = "Jugador #2"
-        jugada = validacion_entradas(jugada, jugador, win)
+        jugada = validacion_entradas(jugada, jugador, win,errorTxt)
+        if jugada < 1 or jugada > 7:
+            errorTxt.setText('El valor entrado no es valido. Vuelva a intentarlo.')
+            while jugada < 1 or jugada > 7:
+                jugada = validacion_entradas(jugada, jugador,win,errorTxt)
         turno = 2
         return jugada, turno
 
@@ -408,7 +420,7 @@ def pantalla_ganadora (win, ganador):
         i.draw(win)
 
 # ----------------------------------------------Codigo main (No utiliza graphic.py)----------------------------------------------
-def connect(win,fila1, fila2, fila3, fila4, fila5,fila6):
+def connect(win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt):
     #Variables
     columnas = 7
     filas = 6
@@ -426,15 +438,15 @@ def connect(win,fila1, fila2, fila3, fila4, fila5,fila6):
     #Entrada de turnos
     while finJuego != 4:
       
-        jugada, turno = entradas(turno, jugada, win,fila1, fila2, fila3, fila4, fila5,fila6)
-        i = proximo_espacio_disponible(board,jugada,turno, columnas, filas)
+        jugada, turno = entradas(turno, jugada, win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt)
+        i = proximo_espacio_disponible(board,jugada,turno, columnas, filas,errorTxt)
         while i == 8:
             if turno == 1:
                 turno = 2
             else:
                 turno = 1
-            jugada, turno = entradas(turno, jugada, win,fila1, fila2, fila3, fila4, fila5,fila6)
-            i = proximo_espacio_disponible(board,jugada,turno, columnas, filas)
+            jugada, turno = entradas(turno, jugada, win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt)
+            i = proximo_espacio_disponible(board,jugada,turno, columnas, filas,errorTxt)
         
 
         movimiento(board,jugada,turno, columnas, filas, i, win,fila1, fila2, fila3, fila4, fila5,fila6)
