@@ -15,36 +15,102 @@ def main():
     div = Line(Point(10,68), Point(90,68))
 
     gameBoard = Rectangle(Point(13,60), Point(87,5))
-    #Circulos 10.57  12.33
-
-    c11 = Circle(Point(23.57,12.33),3)
-
+    gameBoard.setFill('blue')
+    gameBoard.draw(win)
+#Circulos 10.57  12.33
+    mx = 10.57
+    my = 12.33
+    #Primera fila
+    c11 = Circle(Point(8.57,12.33),3)
     c21 = c11.clone()
-    c21.move(10.57,0)
-
     c31 = c11.clone()
-    c31.move(21.14,0)
-
     c41 = c11.clone()
-    c41.move(21.14,0)
-    
+    c51 = c11.clone()
+    c61 = c11.clone()
+    c71 = c11.clone()
+    #Segunda fila
+    c12 = c11.clone()
+    c22 = c11.clone()
+    c32 = c11.clone()
+    c42 = c11.clone()
+    c52 = c11.clone()
+    c62 = c11.clone()
+    c72 = c11.clone()
+    #Tercera fila
+    c11 = Circle(Point(8.57,12.33),3)
+    c21 = c11.clone()
+    c31 = c11.clone()
+    c41 = c11.clone()
+    c51 = c11.clone()
+    c61 = c11.clone()
+    c71 = c11.clone()
+    #Cuarta fila
+    c12 = c11.clone()
+    c22 = c11.clone()
+    c32 = c11.clone()
+    c42 = c11.clone()
+    c52 = c11.clone()
+    c62 = c11.clone()
+    c72 = c11.clone()
+    #Quinta fila
+    c11 = Circle(Point(8.57,12.33),3)
+    c21 = c11.clone()
+    c31 = c11.clone()
+    c41 = c11.clone()
+    c51 = c11.clone()
+    c61 = c11.clone()
+    c71 = c11.clone()
+    #Sexta fila
+    c12 = c11.clone()
+    c22 = c11.clone()
+    c32 = c11.clone()
+    c42 = c11.clone()
+    c52 = c11.clone()
+    c62 = c11.clone()
+    c72 = c11.clone()
+
+
+    fila1 = [c11,c21,c31,c41,c51,c61,c71]
+    for c in fila1:
+        c.move(mx,0)
+        c.setFill('white')
+        c.draw(win)
+        mx = mx + 10.2
+        b = b + 1
+    mx = 10.2
+    my = 10.33
+    fila2 = [c12,c22,c32,c42,c52,c62,c72]
+    for j in fila2:
+        j.move(mx,my)
+        j.setFill('white')
+        j.draw(win)
+        mx = mx + 10.2
+    mx = 10.2
+    my = 10.33
+    fila2 = [c12,c22,c32,c42,c52,c62,c72]
+    for j in fila2:
+        j.move(mx,my)
+        j.setFill('white')
+        j.draw(win)
+        mx = mx + 10.2
+
     #Draw
     logo.draw(win)
     instrucciones.draw(win)
     rec.draw(win)
     div.draw(win)
 
-    c11.draw(win)
-    c21.draw(win)
+    #c11.draw(win)
+    ''' c21.draw(win)
     c31.draw(win)
     c41.draw(win)
     c51.draw(win)
     c61.draw(win)
-    c71.draw(win)
-    c12.draw(win)
+    c71.draw(win) '''
+    ''' c12.draw(win)
     c22.draw(win)
-    c32.draw(win)
-    gameBoard.draw(win)
+    c32.draw(win) '''
+    
     
        
 
