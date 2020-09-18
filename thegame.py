@@ -7,21 +7,22 @@ def main():
     win.setCoords(0,0,100,100)
     logo = Image(Point(22,83),"IMG_0082.gif")
     
-    #Instrucciones
+#Instrucciones
     rec = Rectangle(Point(45,92), Point(90,78))
     instrucciones = Text(rec.getCenter(), "Este espacio es para escribir\ncomo funciona este juego y las reglas.")
 
-    #Linea divisoria
+#Linea divisoria
     div = Line(Point(10,68), Point(90,68))
 
+# Se dibuja el area de juego
     gameBoard = Rectangle(Point(13,60), Point(87,5))
     gameBoard.setFill('blue')
     gameBoard.draw(win)
-#Circulos 10.57  12.33
+# Se dibujan todos los circulos
     mx = 10.57
     my = 12.33
     #Primera fila
-    c11 = Circle(Point(8.57,12.33),3)
+    c11 = Circle(Point(8.57,11.5),3)
     c21 = c11.clone()
     c31 = c11.clone()
     c41 = c11.clone()
@@ -37,79 +38,100 @@ def main():
     c62 = c11.clone()
     c72 = c11.clone()
     #Tercera fila
-    c11 = Circle(Point(8.57,12.33),3)
-    c21 = c11.clone()
-    c31 = c11.clone()
-    c41 = c11.clone()
-    c51 = c11.clone()
-    c61 = c11.clone()
-    c71 = c11.clone()
+    c13 = c11.clone()
+    c23 = c11.clone()
+    c33 = c11.clone()
+    c43 = c11.clone()
+    c53 = c11.clone()
+    c63 = c11.clone()
+    c73 = c11.clone()
     #Cuarta fila
-    c12 = c11.clone()
-    c22 = c11.clone()
-    c32 = c11.clone()
-    c42 = c11.clone()
-    c52 = c11.clone()
-    c62 = c11.clone()
-    c72 = c11.clone()
+    c14 = c11.clone()
+    c24 = c11.clone()
+    c34 = c11.clone()
+    c44 = c11.clone()
+    c54 = c11.clone()
+    c64 = c11.clone()
+    c74 = c11.clone()
     #Quinta fila
-    c11 = Circle(Point(8.57,12.33),3)
-    c21 = c11.clone()
-    c31 = c11.clone()
-    c41 = c11.clone()
-    c51 = c11.clone()
-    c61 = c11.clone()
-    c71 = c11.clone()
+    c15 = c11.clone()
+    c25 = c11.clone()
+    c35 = c11.clone()
+    c45 = c11.clone()
+    c55 = c11.clone()
+    c65 = c11.clone()
+    c75 = c11.clone()
     #Sexta fila
-    c12 = c11.clone()
-    c22 = c11.clone()
-    c32 = c11.clone()
-    c42 = c11.clone()
-    c52 = c11.clone()
-    c62 = c11.clone()
-    c72 = c11.clone()
+    c16 = c11.clone()
+    c26 = c11.clone()
+    c36 = c11.clone()
+    c46 = c11.clone()
+    c56 = c11.clone()
+    c66 = c11.clone()
+    c76 = c11.clone()
 
-
+    #fila 1
     fila1 = [c11,c21,c31,c41,c51,c61,c71]
     for c in fila1:
         c.move(mx,0)
         c.setFill('white')
         c.draw(win)
         mx = mx + 10.2
-        b = b + 1
     mx = 10.2
     my = 10.33
+    #fila 2
     fila2 = [c12,c22,c32,c42,c52,c62,c72]
     for j in fila2:
-        j.move(mx,my)
+        j.move(mx,8)
+        j.setFill('white')
+        j.draw(win)
+        mx = mx + 10.2
+    mx = 10.2
+    #fila 3
+    fila3 = [c13,c23,c33,c43,c53,c63,c73]
+    for j in fila3:
+        j.move(mx,16)
+        j.setFill('white')
+        j.draw(win)
+        mx = mx + 10.2
+    mx = 10.2
+    #fila 4
+    fila4 = [c14,c24,c34,c44,c54,c64,c74]
+    for j in fila4:
+        j.move(mx,24)
         j.setFill('white')
         j.draw(win)
         mx = mx + 10.2
     mx = 10.2
     my = 10.33
-    fila2 = [c12,c22,c32,c42,c52,c62,c72]
-    for j in fila2:
-        j.move(mx,my)
+    # Fila 5
+    fila5 = [c15,c25,c35,c45,c55,c65,c75]
+    for j in fila5:
+        j.move(mx,32)
+        j.setFill('white')
+        j.draw(win)
+        mx = mx + 10.2
+    mx = 10.2
+    #fila 6
+    fila6 = [c16,c26,c36,c46,c56,c66,c76]
+    for j in fila6:
+        j.move(mx,40)
         j.setFill('white')
         j.draw(win)
         mx = mx + 10.2
 
-    #Draw
+# Coneccion con juego no grafico
+    k = win.getKey()
+    
+    
+
+# Se dibujan mas
     logo.draw(win)
     instrucciones.draw(win)
     rec.draw(win)
     div.draw(win)
 
-    #c11.draw(win)
-    ''' c21.draw(win)
-    c31.draw(win)
-    c41.draw(win)
-    c51.draw(win)
-    c61.draw(win)
-    c71.draw(win) '''
-    ''' c12.draw(win)
-    c22.draw(win)
-    c32.draw(win) '''
+    
     
     
        
@@ -121,16 +143,6 @@ def main():
 
 
 # ----------------------------------------------Juego no grafico----------------------------------------------
-def inputNumber(message):
-    while True:
-        try:
-            userInput = int(input(message))       
-        except ValueError:
-            print("Not an integer! Try again.")
-            continue
-        else:
-            return userInput 
-        break 
 
 # ----------------------------------------------Se añade la pieza al board----------------------------------------------
 def movimiento(board, jugada, turno, columnas, filas, i):
@@ -247,5 +259,5 @@ def connect():
                 print(elem, end=' ')
             print()
     
-#connect()
-main()
+connect()
+#main()
