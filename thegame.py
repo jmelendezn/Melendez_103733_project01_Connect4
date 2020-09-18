@@ -7,7 +7,7 @@ def main():
     win.setCoords(0,0,100,100)
     logo = Image(Point(22,83),"IMG_0082.gif")
     
-
+ 
 #Texto de error
     errorTxt = Text(Point(49,62), ' ')
     errorTxt.setSize(13)
