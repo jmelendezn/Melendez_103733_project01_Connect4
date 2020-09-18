@@ -18,6 +18,7 @@ def main():
     rec = Rectangle(Point(45,92), Point(90,78))
     instrucciones = Text(rec.getCenter(), "Conecta 4 fichas de forma horizontal, \nvertical o diagonal para ganar. \nEl primer jugador tendra fichas rojas \ny el segundo jugador tendra fichas amarrillas.")
 
+
 #Linea divisoria
     div = Line(Point(10,68), Point(90,68))
 
@@ -28,7 +29,7 @@ def main():
     num1 = Text(Point(9,3), '1')
     num1.setSize(14)
     num1.setStyle('bold')
-    # num1.draw(win)
+    # num1.draw(win) 
     num2 = num1.clone()
     num3 = num1.clone()
     num4 = num1.clone()
