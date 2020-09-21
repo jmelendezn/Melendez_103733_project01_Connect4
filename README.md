@@ -1,5 +1,5 @@
 # Connect 4
-*README VERSION 1.0*
+
 ## Información Básica del Programa:
 ### **Descripción del programa:**
     Este programa representa el juego de connect 4. La finalidad de este juego es que un jugador logre conectar 4 fichas ya sea de forma horizontal, vertical o diagonal. Por el momento este juego esta diseñado para que se juegue con 2 personas. 
