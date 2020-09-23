@@ -19,7 +19,8 @@
 
 ## ***Todo***
 - [x] Corregir error en donde la columna 7 no se esta tomando en consideracion al momento de verificar si ha ocurrido una jugada ganadora.
-- [ ] Cambiar algunos nombres para que el codigo se mas sencillo de entender.
+- [x] Cambiar algunos nombres para que el codigo se mas sencillo de entender.
 - [ ] Organizar el orden de las funciones
-- [ ] Buscar la forma de simplificar algunos bloques de Código
+- [x] Buscar la forma de simplificar algunos bloques de Código
+- [ ] Asegurar que cada forma de ganar este siendo aceptada. (Se ha encontrado bugs donde el juego no detecta que gano alguien)
 
