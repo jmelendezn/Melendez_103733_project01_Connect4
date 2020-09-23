@@ -6,29 +6,30 @@ def main():
     win = GraphWin('Game', 800,900)
     win.setCoords(0,0,100,100)
     logo = Image(Point(22,83),"IMG_0082.gif")
-    
- 
-#Texto de error
+
+    #Texto de error
     errorTxt = Text(Point(49,62), ' ')
     errorTxt.setSize(13)
     errorTxt.setStyle('bold')
     errorTxt.setTextColor('red')
     errorTxt.draw(win)
-#Instrucciones
+
+    #Instrucciones
     rec = Rectangle(Point(45,92), Point(90,78))
     instrucciones = Text(rec.getCenter(), "Conecta 4 fichas de forma horizontal, \nvertical o diagonal para ganar. \nEl primer jugador tendra fichas rojas \ny el segundo jugador tendra fichas amarrillas.")
 
 
-#Linea divisoria
+    #Linea divisoria
     div = Line(Point(10,68), Point(90,68))
 
-# Se dibuja el area de juego
+    # Se dibuja el area de juego
     gameBoard = Rectangle(Point(13,60), Point(87,5))
     gameBoard.setFill(color_rgb(37,68,65))
     gameBoard.draw(win)
     num1 = Text(Point(9,3), '1')
     num1.setSize(14)
     num1.setStyle('bold')
+
     # num1.draw(win) 
     num2 = num1.clone()
     num3 = num1.clone()
@@ -46,60 +47,61 @@ def main():
         i.setText(j)
         i.draw(win)
         mx = mx + 10.2
-# Se dibujan todos los circulos
+
+    # Se dibujan todos los circulos
     mx = 10.57
     my = 12.33
     #Primera fila
-    c11 = Circle(Point(8.57,11.5),3)
-    c21 = c11.clone()
-    c31 = c11.clone()
-    c41 = c11.clone()
-    c51 = c11.clone()
-    c61 = c11.clone()
-    c71 = c11.clone()
+    c50 = Circle(Point(8.57,11.5),3)
+    c51 = c50.clone()
+    c52 = c50.clone()
+    c53 = c50.clone()
+    c54 = c50.clone()
+    c55 = c50.clone()
+    c56 = c50.clone()
     #Segunda fila
-    c12 = c11.clone()
-    c22 = c11.clone()
-    c32 = c11.clone()
-    c42 = c11.clone()
-    c52 = c11.clone()
-    c62 = c11.clone()
-    c72 = c11.clone()
+    c40 = c50.clone()
+    c41 = c50.clone()
+    c42 = c50.clone()
+    c43 = c50.clone()
+    c44 = c50.clone()
+    c45 = c50.clone()
+    c46 = c50.clone()
     #Tercera fila
-    c13 = c11.clone()
-    c23 = c11.clone()
-    c33 = c11.clone()
-    c43 = c11.clone()
-    c53 = c11.clone()
-    c63 = c11.clone()
-    c73 = c11.clone()
+    c30 = c50.clone()
+    c31 = c50.clone()
+    c32 = c50.clone()
+    c33 = c50.clone()
+    c34 = c50.clone()
+    c35 = c50.clone()
+    c36 = c50.clone()
     #Cuarta fila
-    c14 = c11.clone()
-    c24 = c11.clone()
-    c34 = c11.clone()
-    c44 = c11.clone()
-    c54 = c11.clone()
-    c64 = c11.clone()
-    c74 = c11.clone()
+    c20 = c50.clone()
+    c21 = c50.clone()
+    c22 = c50.clone()
+    c23 = c50.clone()
+    c24 = c50.clone()
+    c25 = c50.clone()
+    c26 = c50.clone()
     #Quinta fila
-    c15 = c11.clone()
-    c25 = c11.clone()
-    c35 = c11.clone()
-    c45 = c11.clone()
-    c55 = c11.clone()
-    c65 = c11.clone()
-    c75 = c11.clone()
+    c10 = c50.clone()
+    c11 = c50.clone()
+    c12 = c50.clone()
+    c13 = c50.clone()
+    c14 = c50.clone()
+    c15 = c50.clone()
+    c16 = c50.clone()
     #Sexta fila
-    c16 = c11.clone()
-    c26 = c11.clone()
-    c36 = c11.clone()
-    c46 = c11.clone()
-    c56 = c11.clone()
-    c66 = c11.clone()
-    c76 = c11.clone()
+    c00 = c50.clone()
+    c01 = c50.clone()
+    c02 = c50.clone()
+    c03 = c50.clone()
+    c04 = c50.clone()
+    c05 = c50.clone()
+    c06 = c50.clone()
 
     #fila 1
-    fila1 = [c11,c21,c31,c41,c51,c61,c71]
+    fila1 = [c50,c51,c52,c53,c54,c55,c56]
     for j in fila1:
         j.move(mx,0)
         j.setFill(color_rgb(239,231,218))
@@ -108,7 +110,7 @@ def main():
         mx = mx + 10.2
     mx = 10.2
     #fila 2
-    fila2 = [c12,c22,c32,c42,c52,c62,c72]
+    fila2 = [c40,c41,c42,c43,c44,c45,c46]
     for j in fila2:
         j.move(mx,8)
         j.setFill(color_rgb(239,231,218))
@@ -117,7 +119,7 @@ def main():
         mx = mx + 10.2
     mx = 10.2
     #fila 3
-    fila3 = [c13,c23,c33,c43,c53,c63,c73]
+    fila3 = [c30,c31,c32,c33,c34,c35,c36]
     for j in fila3:
         j.move(mx,16)
         j.setFill(color_rgb(239,231,218))
@@ -126,7 +128,7 @@ def main():
         mx = mx + 10.2
     mx = 10.2
     #fila 4
-    fila4 = [c14,c24,c34,c44,c54,c64,c74]
+    fila4 = [c20,c21,c22,c23,c24,c25,c26]
     for j in fila4:
         j.move(mx,24)
         j.setFill(color_rgb(239,231,218))
@@ -136,7 +138,7 @@ def main():
     mx = 10.2
     my = 10.33
     # Fila 5
-    fila5 = [c15,c25,c35,c45,c55,c65,c75]
+    fila5 = [c10,c11,c12,c13,c14,c15,c16]
     for j in fila5:
         j.move(mx,32)
         j.setFill(color_rgb(239,231,218))
@@ -145,7 +147,7 @@ def main():
         mx = mx + 10.2
     mx = 10.2
     #fila 6
-    fila6 = [c16,c26,c36,c46,c56,c66,c76]
+    fila6 = [c00,c01,c02,c03,c04,c05,c06]
     for j in fila6:
         j.move(mx,40)
         j.setFill(color_rgb(239,231,218))
@@ -153,167 +155,66 @@ def main():
         j.draw(win)
         mx = mx + 10.2
 
-# Se dibujan mas
+    # Se dibujan mas
     logo.draw(win)
     instrucciones.draw(win)
     rec.draw(win)
     div.draw(win)
 
     
-# Coneccion con juego no grafico
+    # Funcion que ejecuta el juego
+    connect4(win, fila1, fila2, fila3, fila4, fila5,fila6,errorTxt)
     
-    connect(win, fila1, fila2, fila3, fila4, fila5,fila6,errorTxt)
-    
-       
-
-
-
     win.getMouse()
     win.close()
 
-def cambioColor(main):
-    pass
     
 
 # ----------------------------------------------Juego no grafico----------------------------------------------
 
 # ----------------------------------------------Se añade la pieza al board----------------------------------------------
-def movimiento(board, jugada, turno, columnas, filas, i, win,fila1, fila2, fila3, fila4, fila5,fila6):
-    board[columnas-i][jugada-1] = turno
-    print("\n",columnas-i, " ", jugada-1)
+def movimiento(board, jugada, turno, filas, i, win,fila1, fila2, fila3, fila4, fila5,fila6):
+    board[filas-i][jugada-1] = turno
+    print("\n",filas-i, " ", jugada-1)
+    for row in board:
+        for elem in row:
+            print(elem, end=' ')
+        print()
     if turno == 1:
         teamcolor = color_rgb(150,2,0) #Color rojo (Jugador1)
     else:
         teamcolor = color_rgb(245,203,92) #Color amarrillo (Jugador2)
-    if columnas-i == 5 and jugada-1 == 0:   #Fila 1
-        fila1[0].setFill(teamcolor) #11
-        fila1[0].setOutline(teamcolor) 
-    elif columnas-i == 5 and jugada-1 == 1:
-        fila1[1].setFill(teamcolor) #12
-        fila1[1].setOutline(teamcolor)
-    elif columnas-i == 5 and jugada-1 == 2:
-        fila1[2].setFill(teamcolor) #13
-        fila1[2].setOutline(teamcolor)
-    elif columnas-i == 5 and jugada-1 == 3:
-        fila1[3].setFill(teamcolor) #14
-        fila1[3].setOutline(teamcolor)
-    elif columnas-i == 5 and jugada-1 == 4:
-        fila1[4].setFill(teamcolor) #15
-        fila1[4].setOutline(teamcolor)
-    elif columnas-i == 5 and jugada-1 == 5:
-        fila1[5].setFill(teamcolor) #16
-        fila1[5].setOutline(teamcolor)
-    elif columnas-i == 5 and jugada-1 == 6:
-        fila1[6].setFill(teamcolor) #17
-        fila1[6].setOutline(teamcolor)
-    elif columnas-i == 4 and jugada-1 == 0: #FILA 2
-        fila2[0].setFill(teamcolor)
-        fila2[0].setOutline(teamcolor)
-    elif columnas-i == 4 and jugada-1 == 1:
-        fila2[1].setFill(teamcolor)
-        fila2[1].setOutline(teamcolor)
-    elif columnas-i == 4 and jugada-1 == 2:
-        fila2[2].setFill(teamcolor)
-        fila2[2].setOutline(teamcolor)
-    elif columnas-i == 4 and jugada-1 == 3:
-        fila2[3].setFill(teamcolor)
-        fila2[3].setOutline(teamcolor)
-    elif columnas-i == 4 and jugada-1 == 4:
-        fila2[4].setFill(teamcolor)
-        fila2[4].setOutline(teamcolor)
-    elif columnas-i == 4 and jugada-1 == 5:
-        fila2[5].setFill(teamcolor)
-        fila2[5].setOutline(teamcolor)
-    elif columnas-i == 4 and jugada-1 == 6:
-        fila2[6].setFill(teamcolor)
-        fila2[6].setOutline(teamcolor)
-    elif columnas-i == 3 and jugada-1 == 0: #FILA 3
-        fila3[0].setFill(teamcolor)
-        fila3[0].setOutline(teamcolor)
-    elif columnas-i == 3 and jugada-1 == 1:
-        fila3[1].setFill(teamcolor)
-        fila3[1].setOutline(teamcolor)
-    elif columnas-i == 3 and jugada-1 == 2:
-        fila3[2].setFill(teamcolor)
-        fila3[2].setOutline(teamcolor)
-    elif columnas-i == 3 and jugada-1 == 3:
-        fila3[3].setFill(teamcolor)
-        fila3[3].setOutline(teamcolor)
-    elif columnas-i == 3 and jugada-1 == 4:
-        fila3[4].setFill(teamcolor)
-        fila3[4].setOutline(teamcolor)
-    elif columnas-i == 3 and jugada-1 == 5:
-        fila3[5].setFill(teamcolor)
-        fila3[5].setOutline(teamcolor)
-    elif columnas-i == 3 and jugada-1 == 6:
-        fila3[6].setFill(teamcolor)
-        fila3[6].setOutline(teamcolor)
-    elif columnas-i == 2 and jugada-1 == 0: #FILA 4
-        fila4[0].setFill(teamcolor)
-        fila4[0].setOutline(teamcolor)
-    elif columnas-i == 2 and jugada-1 == 1:
-        fila4[1].setFill(teamcolor)
-        fila4[1].setOutline(teamcolor)
-    elif columnas-i == 2 and jugada-1 == 2:
-        fila4[2].setFill(teamcolor)
-        fila4[2].setOutline(teamcolor)
-    elif columnas-i == 2 and jugada-1 == 3:
-        fila4[3].setFill(teamcolor)
-        fila4[3].setOutline(teamcolor)
-    elif columnas-i == 2 and jugada-1 == 4:
-        fila4[4].setFill(teamcolor)
-        fila4[4].setOutline(teamcolor)
-    elif columnas-i == 2 and jugada-1 == 5:
-        fila4[5].setFill(teamcolor)
-        fila4[5].setOutline(teamcolor)
-    elif columnas-i == 2 and jugada-1 == 6:
-        fila4[6].setFill(teamcolor)
-        fila4[6].setOutline(teamcolor)
-    elif columnas-i == 1 and jugada-1 == 0: #FILA 5
-        fila5[0].setFill(teamcolor)
-        fila5[0].setOutline(teamcolor)
-    elif columnas-i == 1 and jugada-1 == 1:
-        fila5[1].setFill(teamcolor)
-        fila5[1].setOutline(teamcolor)
-    elif columnas-i == 1 and jugada-1 == 2:
-        fila5[2].setFill(teamcolor)
-        fila5[2].setOutline(teamcolor)
-    elif columnas-i == 1 and jugada-1 == 3:
-        fila5[3].setFill(teamcolor)
-        fila5[3].setOutline(teamcolor)
-    elif columnas-i == 1 and jugada-1 == 4:
-        fila5[4].setFill(teamcolor)
-        fila5[4].setOutline(teamcolor)
-    elif columnas-i == 1 and jugada-1 == 5:
-        fila5[5].setFill(teamcolor)
-        fila5[5].setOutline(teamcolor)
-    elif columnas-i == 1 and jugada-1 == 6:
-        fila5[6].setFill(teamcolor)
-        fila5[6].setOutline(teamcolor)
-    elif columnas-i == 0 and jugada-1 == 0: #FILA 6
-        fila6[0].setFill(teamcolor)
-        fila6[0].setOutline(teamcolor)
-    elif columnas-i == 0 and jugada-1 == 1:
-        fila6[1].setFill(teamcolor)
-        fila6[1].setOutline(teamcolor)
-    elif columnas-i == 0 and jugada-1 == 2:
-        fila6[2].setFill(teamcolor)
-        fila6[2].setOutline(teamcolor)
-    elif columnas-i == 0 and jugada-1 == 3:
-        fila6[3].setFill(teamcolor)
-        fila6[3].setOutline(teamcolor)
-    elif columnas-i == 0 and jugada-1 == 4:
-        fila6[4].setFill(teamcolor)
-        fila6[4].setOutline(teamcolor)
-    elif columnas-i == 0 and jugada-1 == 5:
-        fila6[5].setFill(teamcolor)
-        fila6[5].setOutline(teamcolor)
-    elif columnas-i == 0 and jugada-1 == 6:
-        fila6[6].setFill(teamcolor)
-        fila6[6].setOutline(teamcolor)
 
+    
+    for u in range(7):
+        if filas-i == 5 and jugada-1 == u:   #Fila 1
+            fila1[u].setFill(teamcolor) 
+            fila1[u].setOutline(teamcolor)
+            
+    for u in range(7):
+        if filas-i == 4 and jugada-1 == u:   #Fila 2
+            fila2[u].setFill(teamcolor) 
+            fila2[u].setOutline(teamcolor)
+            
+    for u in range(7):
+        if filas-i == 3 and jugada-1 == u:   #Fila 3
+            fila3[u].setFill(teamcolor) 
+            fila3[u].setOutline(teamcolor)
 
+    for u in range(7):
+        if filas-i == 2 and jugada-1 == u:   #Fila 4
+            fila4[u].setFill(teamcolor) 
+            fila4[u].setOutline(teamcolor)
 
+    for u in range(7):
+        if filas-i == 1 and jugada-1 == u:   #Fila 5
+            fila5[u].setFill(teamcolor) 
+            fila5[u].setOutline(teamcolor)
+
+    for u in range(7):
+        if filas-i == 0 and jugada-1 == u:   #Fila 6
+            fila6[u].setFill(teamcolor) 
+            fila6[u].setOutline(teamcolor)
     
 
 # ----------------------------------------------Se reciben los input de los jugadores y se valida que el mismo entre un numero entero----------------------------------------------
@@ -324,6 +225,10 @@ def validacion_entradas(jugada, jugador, win,errorTxt):
                 textturno = Text(Point(49,65), jugador + ' entre el numero de la columna que desea ubicar su ficha')
                 textturno.draw(win)
                 jugada = int(win.getKey())
+                while jugada < 1 or jugada > 7:
+                    errorTxt.setText('El valor entrado no es valido. Vuelva a intentarlo.')
+                    jugada = int(win.getKey())
+                    errorTxt.setText('')
                 textturno.setText(' ')
                 errorTxt.setText(' ')
                 return  jugada
@@ -336,73 +241,91 @@ def validacion_entradas(jugada, jugador, win,errorTxt):
         break
 
 # ----------------------------------------------Determina cual es el proximo espacio disponible en cada columna----------------------------------------------
-def proximo_espacio_disponible(board, jugada, turno, columnas, filas,errorTxt):
-    i = 2
+def proximo_espacio_disponible(board, jugada, turno, filas,errorTxt):
+    i = 1
     while True:
-        try:
-            while board[columnas-i][jugada-1] != 0:
-                i = i + 1
-                if i > 7:
-                    errorTxt.setText('Esta columna ya esta llena. Intente en otra.')
-                    i = 8
-                    if turno == 1:
-                        turno = 2
-                    else:
-                        turno = 1
-                    break
-            return i
-        except ValueError:
-            print('Esta columna ya esta llena. Intente en otra.')
-            break
-            
-def entradas(turno, jugada, win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt):
+
+        while board[filas-i][jugada-1] != 0:
+            i = i + 1
+            if i > 6:
+                errorTxt.setText('Esta columna ya esta llena. Intente en otra.')
+                i = 8
+                if turno == 1:
+                    turno = 2
+                else:
+                    turno = 1
+                break
+        return i
+        
+# Se indentifica de quien es el turno y llama la funcion que permite la entrada de la columna que el jugador desea seleccionar         
+def entradas(turno, jugada, win,errorTxt):
     jugada = 0
     if turno == 2:
         jugador = "Jugador #1"
-        jugada = validacion_entradas(jugada, jugador, win,errorTxt)
-        if jugada < 1 or jugada > 7:
-            errorTxt.setText('El valor entrado no es valido. Vuelva a intentarlo.')
-            while jugada < 1 or jugada > 7:
-                jugada = validacion_entradas(jugada, jugador,win,errorTxt)
-        turno = 1
-        return jugada, turno 
+        turno = 1 
     else:
         jugador = "Jugador #2"
-        jugada = validacion_entradas(jugada, jugador, win,errorTxt)
-        if jugada < 1 or jugada > 7:
-            errorTxt.setText('El valor entrado no es valido. Vuelva a intentarlo.')
-            while jugada < 1 or jugada > 7:
-                jugada = validacion_entradas(jugada, jugador,win,errorTxt)
         turno = 2
-        return jugada, turno
+
+    jugada = validacion_entradas(jugada, jugador, win,errorTxt)
+    # if jugada < 1 or jugada > 7:
+    #     errorTxt.setText('El valor entrado no es valido. Vuelva a intentarlo.')
+    #     while jugada < 1 or jugada > 7:
+    #         jugada = validacion_entradas(jugada, jugador,win,errorTxt)
+    return jugada, turno
 
 def columnaLlena():
     pass
 
+# Funcion que verifica si en alguna parte de la matriz hay un ganador
 def verificar_ganador(board, jugada, turno):
-    #Verificar horizontal
-    for i in range(3):
-            for j in range(6):
+    #Verificar verticalmente
+    try:
+        for i in range(6):
+            for j in range(7):
                 if board[i][j] == turno and board[i+1][j] == turno and board[i+2][j] == turno and board[i+3][j] == turno:
                     return 4
-    #Verificar vertical                                    
-    for i in range(6):
-            for j in range(3):
+    except IndexError:
+        print('No se encontro un ganador verticalmente')
+
+    #Verificar horizontalmente
+    try:
+        for i in range(6):
+            for j in range(7):
                 if board[i][j] == turno and board[i][j+1] == turno and board[i][j+2] == turno and board[i][j+3] == turno:
                     return 4
+    except IndexError:
+        print('No se encontro un ganador horizontalmente')
+
     #Verificar diagonal hacia atras
-    for i in range(3):
-            for j in range(6):
+    try:
+        for i in range(6):
+            for j in range(7):
                 if board[i][j] == turno and board[i+1][j+1] == turno and board[i+2][j+2] == turno and board[i+3][j+3] == turno:
                     return 4
-    #Verificar diagonal hacia adelante
-    for i in range(6):
-            for j in range(3):
+    except IndexError:
+        print('No se encontro un ganador de forma diagonal hacia atras')
+    
+    #Verificar diagonal hacia atras
+    try:
+        for i in range(6):
+            for j in range(7):
                 if board[i][j] == turno and board[i-1][j+1] == turno and board[i-2][j+2] == turno and board[i-3][j+3] == turno:
                     return 4
+    except IndexError:
+        print('No se encontro un ganador de forma diagonal hacia atras')
+
+    # Si no hay ganador retorna falso
     return False
 
-def pantalla_ganadora (win, ganador):
+# Funcion que genera una pantalla grafica una vez halla un ganador
+def pantalla_ganadora (win, turno):
+    # Se selecciona el nombre del ganador
+    if turno == 1:
+        ganador = 'Jugador #1'
+    else:
+        ganador = 'Jugador #2'
+
     rec2 = Rectangle(Point(21.5,40), Point(77,25))
     rec2.setFill(color_rgb(255,89,94))
     
@@ -420,8 +343,8 @@ def pantalla_ganadora (win, ganador):
     for i in objetos_ganadores:
         i.draw(win)
 
-# ----------------------------------------------Codigo main (No utiliza graphic.py)----------------------------------------------
-def connect(win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt):
+# Funcion que ejecuta el juego de Connect 4
+def connect4(win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt):
     #Variables
     columnas = 7
     filas = 6
@@ -438,26 +361,26 @@ def connect(win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt):
 
     #Entrada de turnos
     while finJuego != 4:
-      
-        jugada, turno = entradas(turno, jugada, win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt)
-        i = proximo_espacio_disponible(board,jugada,turno, columnas, filas,errorTxt)
+        # Se recibe y se valida el dato entrado por el jugador
+        jugada, turno = entradas(turno, jugada, win,errorTxt)
+        # Se identifica en que fila de la columna que eligio el jugador esta disponible
+        i = proximo_espacio_disponible(board,jugada,turno, filas,errorTxt)
+
         while i == 8:
             if turno == 1:
                 turno = 2
             else:
                 turno = 1
-            jugada, turno = entradas(turno, jugada, win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt)
-            i = proximo_espacio_disponible(board,jugada,turno, columnas, filas,errorTxt)
+            jugada, turno = entradas(turno, jugada, win,errorTxt)
+            i = proximo_espacio_disponible(board,jugada,turno, filas,errorTxt)
         
-
-        movimiento(board,jugada,turno, columnas, filas, i, win,fila1, fila2, fila3, fila4, fila5,fila6)
-        
+        # Se registra el movimiento en la matriz y en la pantalla grafica
+        movimiento(board,jugada,turno, filas, i, win,fila1, fila2, fila3, fila4, fila5,fila6)
+        # Se verifica si hay un ganador
         finJuego = verificar_ganador(board, jugada, turno)
-        if turno == 1:
-            ganador = 'Jugador #1'
-        else:
-            ganador = 'Jugador #2'
-    pantalla_ganadora (win, ganador)
+
+    #Llamado a la funcion que crea una pantalla anunciando al ganador    
+    pantalla_ganadora(win, turno)
 main()
 
 

@@ -13,8 +13,13 @@
     Josué Meléndez Nieves (#103733)
     Estudiante de la Universidad Politécnica de Puerto Rico
 
+### **Referencias**
+    Para realizar este programa se tomo como referencia el juego de Connect 4 del canal de Youtube freeCodeCamp.org en donde se utilizo el mismo para crear un plan de las funciones que necesitaba el juego para que funcionara correctamente. El link del video es el siguinte: https://youtu.be/XpYz-q1lxu8
+
+
 ## ***Todo***
-- [ ] Corregir error en donde la columna 7 no se esta tomando en consideracion al momento de verificar si ha ocurrido una jugada ganadora.
+- [x] Corregir error en donde la columna 7 no se esta tomando en consideracion al momento de verificar si ha ocurrido una jugada ganadora.
 - [ ] Cambiar algunos nombres para que el codigo se mas sencillo de entender.
 - [ ] Organizar el orden de las funciones
 - [ ] Buscar la forma de simplificar algunos bloques de Código
+
