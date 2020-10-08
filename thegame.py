@@ -1,12 +1,25 @@
 from graphics import *
-import tkinter as tk
+
 
 # ----------------------------------------------Pantalla grafica----------------------------------------------
 def main():
+    #Se crea la pantalla grafica
     win = GraphWin('Game', 800,900)
     win.setCoords(0,0,100,100)
-    logo = Image(Point(22,83),"IMG_0082.gif")
 
+    # Se llama la funcion que dibuja el juego
+    fila1, fila2, fila3, fila4, fila5,fila6,errorTxt = dibujar_juego(win)
+    
+    # Funcion que ejecuta el juego
+    connect4(win, fila1, fila2, fila3, fila4, fila5,fila6,errorTxt)
+    
+    win.getMouse()
+    win.close()
+
+    
+# ----------------------------------------------Se añade la pieza al board----------------------------------------------
+def dibujar_juego(win):
+    logo = Image(Point(22,83),"IMG_0082.gif")
     #Texto de error
     errorTxt = Text(Point(49,62), ' ')
     errorTxt.setSize(13)
@@ -161,18 +174,9 @@ def main():
     rec.draw(win)
     div.draw(win)
 
-    
-    # Funcion que ejecuta el juego
-    connect4(win, fila1, fila2, fila3, fila4, fila5,fila6,errorTxt)
-    
-    win.getMouse()
-    win.close()
+    return fila1, fila2, fila3, fila4, fila5,fila6,errorTxt
 
-    
 
-# ----------------------------------------------Juego no grafico----------------------------------------------
-
-# ----------------------------------------------Se añade la pieza al board----------------------------------------------
 def movimiento(board, jugada, turno, filas, i, win,fila1, fila2, fila3, fila4, fila5,fila6):
     board[filas-i][jugada-1] = turno
     print("\n",filas-i, " ", jugada-1)
