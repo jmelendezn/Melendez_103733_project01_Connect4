@@ -1,12 +1,233 @@
 from graphics import *
-import tkinter as tk
+class Connect4:
+    def __init__ (self,win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt):
+        self.win = win
+        self.fila1 = fila1
+        self.fila2 = fila2
+        self.fila3 = fila3
+        self.fila4 = fila4
+        self.fila5 = fila5
+        self.fila6 = fila6
+        self.errorTxt = errorTxt
+        self.columnas = 7
+        self.filas = 6
+        self.finJuego = 0
+        self.turno = 2
+        self.jugada = 0
+        self.board = [[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]
+        self.i = 0
+    def the_game(self):
+        
+        for row in self.board:
+            for elem in row:
+                print(elem, end=' ')
+            print()
 
+        #Entrada de turnos
+        while self.finJuego != 4:
+            # Se recibe y se valida el dato entrado por el jugador
+            self.jugada, self.turno = self.entradas()
+            # Se identifica en que fila de la columna que eligio el jugador esta disponible
+            self.i = self.proximo_espacio_disponible()
+
+            while self.i == 8:
+                if self.turno == 1:
+                    self.turno = 2
+                else:
+                    self.turno = 1
+                self.jugada, self.turno = entradas(self.turno, self.jugada, self.win,self.errorTxt)
+                self.i = proximo_espacio_disponible(self.board,self.jugada,self.turno, self.filas,self.errorTxt)
+            
+            # Se registra el movimiento en la matriz y en la pantalla grafica
+            self.movimiento()
+            # Se verifica si hay un ganador
+            self.finJuego = self.verificar_ganador()
+
+        #Llamado a la funcion que crea una pantalla anunciando al ganador    
+        self.pantalla_ganadora()
+    
+    def entradas(self):
+        self.jugada = 0
+        if self.turno == 2:
+            self.jugador = "Jugador #1"
+            self.turno = 1 
+        else:
+            self.jugador = "Jugador #2"
+            self.turno = 2
+
+        self.jugada = self.validacion_entradas()
+    
+        return self.jugada, self.turno
+
+    # Se reciben los input de los jugadores y se valida que el mismo entre un numero entero
+    def validacion_entradas(self):
+        while True:
+            try:
+                while True:
+                    textturno = Text(Point(49,65), self.jugador + ' entre el numero de la columna que desea ubicar su ficha')
+                    textturno.draw(self.win)
+                    self.jugada = int(self.win.getKey())
+                    while self.jugada < 1 or self.jugada > 7:
+                        self.errorTxt.setText('El valor entrado no es valido. Vuelva a intentarlo.')
+                        self.jugada = int(self.win.getKey())
+                        self.errorTxt.setText('')
+                    textturno.setText(' ')
+                    self.errorTxt.setText(' ')
+                    return  self.jugada
+            except ValueError:
+                self.errorTxt.setText('El valor entrado no es valido. Vuelva a intentarlo.')
+                textturno.setText(' ')
+                continue
+            else:
+                return  self.jugada
+            break
+    
+    def proximo_espacio_disponible(self):
+        i = 1
+        while True:
+
+            while self.board[self.filas-i][self.jugada-1] != 0:
+                i = i + 1
+                if i > 6:
+                    self.errorTxt.setText('Esta columna ya esta llena. Intente en otra.')
+                    i = 8
+                    if self.turno == 1:
+                        self.turno = 2
+                    else:
+                        self.turno = 1
+                    break
+            return i
+
+    def movimiento(self):
+        self.board[self.filas-self.i][self.jugada-1] = self.turno
+        print("\n",self.filas-self.i, " ", self.jugada-1)
+        for row in self.board:
+            for elem in row:
+                print(elem, end=' ')
+            print()
+        if self.turno == 1:
+            teamcolor = color_rgb(150,2,0) #Color rojo (Jugador1)
+        else:
+            teamcolor = color_rgb(245,203,92) #Color amarrillo (Jugador2)
+
+        
+        for u in range(7):
+            if self.filas-self.i == 5 and self.jugada-1 == u:   #Fila 1
+                self.fila1[u].setFill(teamcolor) 
+                self.fila1[u].setOutline(teamcolor)
+                
+        for u in range(7):
+            if self.filas-self.i == 4 and self.jugada-1 == u:   #Fila 2
+                self.fila2[u].setFill(teamcolor) 
+                self.fila2[u].setOutline(teamcolor)
+                
+        for u in range(7):
+            if self.filas-self.i == 3 and self.jugada-1 == u:   #Fila 3
+                self.fila3[u].setFill(teamcolor) 
+                self.fila3[u].setOutline(teamcolor)
+
+        for u in range(7):
+            if self.filas-self.i == 2 and self.jugada-1 == u:   #Fila 4
+                self.fila4[u].setFill(teamcolor) 
+                self.fila4[u].setOutline(teamcolor)
+
+        for u in range(7):
+            if self.filas-self.i == 1 and self.jugada-1 == u:   #Fila 5
+                self.fila5[u].setFill(teamcolor) 
+                self.fila5[u].setOutline(teamcolor)
+
+        for u in range(7):
+            if self.filas-self.i == 0 and self.jugada-1 == u:   #Fila 6
+                self.fila6[u].setFill(teamcolor) 
+                self.fila6[u].setOutline(teamcolor)
+
+    # Funcion que verifica si en alguna parte de la matriz hay un ganador
+    def verificar_ganador(self):
+        #Verificar verticalmente
+        try:
+            for i in range(6):
+                for j in range(7):
+                    if self.board[i][j] == self.turno and self.board[i+1][j] == self.turno and self.board[i+2][j] == self.turno and self.board[i+3][j] == self.turno:
+                        return 4
+        except IndexError:
+            print('No se encontro un ganador verticalmente')
+
+        #Verificar horizontalmente
+        try:
+            for i in range(6):
+                for j in range(7):
+                    if self.board[i][j] == self.turno and self.board[i][j+1] == self.turno and self.board[i][j+2] == self.turno and self.board[i][j+3] == self.turno:
+                        return 4
+        except IndexError:
+            print('No se encontro un ganador horizontalmente')
+
+        #Verificar diagonal hacia atras
+        try:
+            for i in range(6):
+                for j in range(7):
+                    if self.board[i][j] == self.turno and self.board[i+1][j+1] == self.turno and self.board[i+2][j+2] == self.turno and self.board[i+3][j+3] == self.turno:
+                        return 4
+        except IndexError:
+            print('No se encontro un ganador de forma diagonal hacia atras')
+        
+        #Verificar diagonal hacia atras
+        try:
+            for i in range(6):
+                for j in range(7):
+                    if self.board[i][j] == self.turno and self.board[i-1][j+1] == self.turno and self.board[i-2][j+2] == self.turno and self.board[i-3][j+3] == self.turno:
+                        return 4
+        except IndexError:
+            print('No se encontro un ganador de forma diagonal hacia atras')
+
+        # Si no hay ganador retorna falso
+        return False
+
+    # Funcion que genera una pantalla grafica una vez halla un ganador
+    def pantalla_ganadora (self):
+        # Se selecciona el nombre del ganador
+        if self.turno == 1:
+            ganador = 'Jugador #1'
+        else:
+            ganador = 'Jugador #2'
+
+        rec2 = Rectangle(Point(21.5,40), Point(77,25))
+        rec2.setFill(color_rgb(255,89,94))
+        
+
+        textoganador = Text(rec2.getCenter(), ganador + ' \nFelicidades has ganado')
+        textoganador.setSize(20)
+        textoganador.setTextColor('white')
+        textoganador.setStyle('bold')
+
+        textosalida = Text(Point(49,65), 'TOQUE LA PANTALLA PARA SALIR DEL JUEGO')
+        textosalida.setSize(20)
+        textosalida.setStyle('bold')
+
+        objetos_ganadores = [rec2,textoganador,textosalida]
+        for i in objetos_ganadores:
+            i.draw(self.win)
 # ----------------------------------------------Pantalla grafica----------------------------------------------
 def main():
+    #Se crea la pantalla grafica
     win = GraphWin('Game', 800,900)
     win.setCoords(0,0,100,100)
-    logo = Image(Point(22,83),"IMG_0082.gif")
 
+    # Se llama la funcion que dibuja el juego
+    fila1, fila2, fila3, fila4, fila5,fila6,errorTxt = dibujar_juego(win)
+    
+    # Funcion que ejecuta el juego
+    game = Connect4(win, fila1, fila2, fila3, fila4, fila5,fila6,errorTxt)
+    game.the_game()
+    
+# def __init__ (self,win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt):
+
+    win.getMouse()
+    win.close()
+
+    
+# ----------------------------------------------Se añade la pieza al board----------------------------------------------
+def dibujar_juego(win):
+    logo = Image(Point(22,83),"IMG_0082.gif")
     #Texto de error
     errorTxt = Text(Point(49,62), ' ')
     errorTxt.setSize(13)
@@ -161,227 +382,8 @@ def main():
     rec.draw(win)
     div.draw(win)
 
-    
-    # Funcion que ejecuta el juego
-    connect4(win, fila1, fila2, fila3, fila4, fila5,fila6,errorTxt)
-    
-    win.getMouse()
-    win.close()
+    return fila1, fila2, fila3, fila4, fila5,fila6,errorTxt
 
-    
 
-# ----------------------------------------------Juego no grafico----------------------------------------------
 
-# ----------------------------------------------Se añade la pieza al board----------------------------------------------
-def movimiento(board, jugada, turno, filas, i, win,fila1, fila2, fila3, fila4, fila5,fila6):
-    board[filas-i][jugada-1] = turno
-    print("\n",filas-i, " ", jugada-1)
-    for row in board:
-        for elem in row:
-            print(elem, end=' ')
-        print()
-    if turno == 1:
-        teamcolor = color_rgb(150,2,0) #Color rojo (Jugador1)
-    else:
-        teamcolor = color_rgb(245,203,92) #Color amarrillo (Jugador2)
-
-    
-    for u in range(7):
-        if filas-i == 5 and jugada-1 == u:   #Fila 1
-            fila1[u].setFill(teamcolor) 
-            fila1[u].setOutline(teamcolor)
-            
-    for u in range(7):
-        if filas-i == 4 and jugada-1 == u:   #Fila 2
-            fila2[u].setFill(teamcolor) 
-            fila2[u].setOutline(teamcolor)
-            
-    for u in range(7):
-        if filas-i == 3 and jugada-1 == u:   #Fila 3
-            fila3[u].setFill(teamcolor) 
-            fila3[u].setOutline(teamcolor)
-
-    for u in range(7):
-        if filas-i == 2 and jugada-1 == u:   #Fila 4
-            fila4[u].setFill(teamcolor) 
-            fila4[u].setOutline(teamcolor)
-
-    for u in range(7):
-        if filas-i == 1 and jugada-1 == u:   #Fila 5
-            fila5[u].setFill(teamcolor) 
-            fila5[u].setOutline(teamcolor)
-
-    for u in range(7):
-        if filas-i == 0 and jugada-1 == u:   #Fila 6
-            fila6[u].setFill(teamcolor) 
-            fila6[u].setOutline(teamcolor)
-    
-
-# ----------------------------------------------Se reciben los input de los jugadores y se valida que el mismo entre un numero entero----------------------------------------------
-def validacion_entradas(jugada, jugador, win,errorTxt):
-    while True:
-        try:
-            while True:
-                textturno = Text(Point(49,65), jugador + ' entre el numero de la columna que desea ubicar su ficha')
-                textturno.draw(win)
-                jugada = int(win.getKey())
-                while jugada < 1 or jugada > 7:
-                    errorTxt.setText('El valor entrado no es valido. Vuelva a intentarlo.')
-                    jugada = int(win.getKey())
-                    errorTxt.setText('')
-                textturno.setText(' ')
-                errorTxt.setText(' ')
-                return  jugada
-        except ValueError:
-            errorTxt.setText('El valor entrado no es valido. Vuelva a intentarlo.')
-            textturno.setText(' ')
-            continue
-        else:
-            return  jugada
-        break
-
-# ----------------------------------------------Determina cual es el proximo espacio disponible en cada columna----------------------------------------------
-def proximo_espacio_disponible(board, jugada, turno, filas,errorTxt):
-    i = 1
-    while True:
-
-        while board[filas-i][jugada-1] != 0:
-            i = i + 1
-            if i > 6:
-                errorTxt.setText('Esta columna ya esta llena. Intente en otra.')
-                i = 8
-                if turno == 1:
-                    turno = 2
-                else:
-                    turno = 1
-                break
-        return i
-        
-# Se indentifica de quien es el turno y llama la funcion que permite la entrada de la columna que el jugador desea seleccionar         
-def entradas(turno, jugada, win,errorTxt):
-    jugada = 0
-    if turno == 2:
-        jugador = "Jugador #1"
-        turno = 1 
-    else:
-        jugador = "Jugador #2"
-        turno = 2
-
-    jugada = validacion_entradas(jugada, jugador, win,errorTxt)
-    # if jugada < 1 or jugada > 7:
-    #     errorTxt.setText('El valor entrado no es valido. Vuelva a intentarlo.')
-    #     while jugada < 1 or jugada > 7:
-    #         jugada = validacion_entradas(jugada, jugador,win,errorTxt)
-    return jugada, turno
-
-def columnaLlena():
-    pass
-
-# Funcion que verifica si en alguna parte de la matriz hay un ganador
-def verificar_ganador(board, jugada, turno):
-    #Verificar verticalmente
-    try:
-        for i in range(6):
-            for j in range(7):
-                if board[i][j] == turno and board[i+1][j] == turno and board[i+2][j] == turno and board[i+3][j] == turno:
-                    return 4
-    except IndexError:
-        print('No se encontro un ganador verticalmente')
-
-    #Verificar horizontalmente
-    try:
-        for i in range(6):
-            for j in range(7):
-                if board[i][j] == turno and board[i][j+1] == turno and board[i][j+2] == turno and board[i][j+3] == turno:
-                    return 4
-    except IndexError:
-        print('No se encontro un ganador horizontalmente')
-
-    #Verificar diagonal hacia atras
-    try:
-        for i in range(6):
-            for j in range(7):
-                if board[i][j] == turno and board[i+1][j+1] == turno and board[i+2][j+2] == turno and board[i+3][j+3] == turno:
-                    return 4
-    except IndexError:
-        print('No se encontro un ganador de forma diagonal hacia atras')
-    
-    #Verificar diagonal hacia atras
-    try:
-        for i in range(6):
-            for j in range(7):
-                if board[i][j] == turno and board[i-1][j+1] == turno and board[i-2][j+2] == turno and board[i-3][j+3] == turno:
-                    return 4
-    except IndexError:
-        print('No se encontro un ganador de forma diagonal hacia atras')
-
-    # Si no hay ganador retorna falso
-    return False
-
-# Funcion que genera una pantalla grafica una vez halla un ganador
-def pantalla_ganadora (win, turno):
-    # Se selecciona el nombre del ganador
-    if turno == 1:
-        ganador = 'Jugador #1'
-    else:
-        ganador = 'Jugador #2'
-
-    rec2 = Rectangle(Point(21.5,40), Point(77,25))
-    rec2.setFill(color_rgb(255,89,94))
-    
-
-    textoganador = Text(rec2.getCenter(), ganador + ' \nFelicidades has ganado')
-    textoganador.setSize(20)
-    textoganador.setTextColor('white')
-    textoganador.setStyle('bold')
-
-    textosalida = Text(Point(49,65), 'TOQUE LA PANTALLA PARA SALIR DEL JUEGO')
-    textosalida.setSize(20)
-    textosalida.setStyle('bold')
-
-    objetos_ganadores = [rec2,textoganador,textosalida]
-    for i in objetos_ganadores:
-        i.draw(win)
-
-# Funcion que ejecuta el juego de Connect 4
-def connect4(win,fila1, fila2, fila3, fila4, fila5,fila6,errorTxt):
-    #Variables
-    columnas = 7
-    filas = 6
-    finJuego = 0
-    turno = 2
-    jugada = 0
-
-    #Board para el juego
-    board = [[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]
-    for row in board:
-        for elem in row:
-            print(elem, end=' ')
-        print()
-
-    #Entrada de turnos
-    while finJuego != 4:
-        # Se recibe y se valida el dato entrado por el jugador
-        jugada, turno = entradas(turno, jugada, win,errorTxt)
-        # Se identifica en que fila de la columna que eligio el jugador esta disponible
-        i = proximo_espacio_disponible(board,jugada,turno, filas,errorTxt)
-
-        while i == 8:
-            if turno == 1:
-                turno = 2
-            else:
-                turno = 1
-            jugada, turno = entradas(turno, jugada, win,errorTxt)
-            i = proximo_espacio_disponible(board,jugada,turno, filas,errorTxt)
-        
-        # Se registra el movimiento en la matriz y en la pantalla grafica
-        movimiento(board,jugada,turno, filas, i, win,fila1, fila2, fila3, fila4, fila5,fila6)
-        # Se verifica si hay un ganador
-        finJuego = verificar_ganador(board, jugada, turno)
-
-    #Llamado a la funcion que crea una pantalla anunciando al ganador    
-    pantalla_ganadora(win, turno)
 main()
-
-
-            
